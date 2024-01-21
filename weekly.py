@@ -1,7 +1,14 @@
+# import necessary modules
 import time
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, request, url_for, session, redirect
+from datetime import datetime
+import os
+
+os.environ['SPOTIPY_CLIENT_ID'] = 'MY CLIENT ID'
+os.environ['SPOTIPY_CLIENT_SECRET'] = 'MY CLIENT SECRET'
+os.environ['SPOTIPY_REDIRECT_URI'] = 'MY REDIRECT URI'
 
 app = Flask(__name__)
 
@@ -78,7 +85,7 @@ def get_token():
 def create_spotify_oauth():
     return SpotifyOAuth(
         client_id = 'MY CLIENT ID',
-        client_secret = 'MY CLIENT KEY',
+        client_secret = 'MY CLIENT SECRET',
         redirect_uri = url_for('redirect_page', _external=True),
         scope='user-library-read playlist-modify-public playlist-modify-private'
     )
