@@ -1,22 +1,16 @@
-# import necessary modules
 import time
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, request, url_for, session, redirect
 
-# initialize Flask app
 app = Flask(__name__)
 
-# set the name of the session cookie
 app.config['SESSION_COOKIE_NAME'] = 'Spotify Cookie'
 
-# set a random secret key to sign the cookie
 app.secret_key = 'MY SECRET KEY'
 
-# set the key for the token info in the session dictionary
 TOKEN_INFO = 'token_info'
 
-# route to handle logging in
 @app.route('/')
 def login():
     auth_url = create_spotify_oauth().get_authorize_url()
