@@ -18,6 +18,11 @@ app.secret_key = 'MY SECRET KEY'
 
 TOKEN_INFO = 'token_info'
 
+def lambda_handler(event, context):
+    # Run the function every Monday at 12:00 PM UTC
+    if datetime.utcnow().weekday() != 0 or datetime.utcnow().hour != 12:
+        return {'statusCode': 200, 'body': 'Not scheduled time'}
+
 @app.route('/')
 def login():
     auth_url = create_spotify_oauth().get_authorize_url()
